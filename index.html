@@ -17,12 +17,17 @@
 <div class="awning" aria-hidden="true"></div>
 <header class="top">
 <a class="brand" href="#/">Café <span>&amp;</span> Versos</a>
-<nav><a href="#/">Início</a><a href="#/avaliar/">Avaliar</a></nav>
+<nav>
+<a id="navHome" href="#/">Início</a>
+<a id="navRate" href="#/avaliar/">Avaliar</a>
+<label class="langbar"><span class="sr" id="langLbl">Idioma</span><select id="lang"></select></label>
+</nav>
 </header>
 <main id="view" aria-live="polite"></main>
 <footer class="foot">
 <div class="beans" aria-hidden="true"><svg><use href="#bean"/></svg><svg><use href="#bean"/></svg><svg><use href="#bean"/></svg></div>
-<p>Servido com carinho, sempre quentinho.</p>
+<p id="footTxt"></p>
+<p class="views" id="footViews"></p>
 </footer>
 <script src="protect.js"></script>
 <script type="module" src="db.js"></script>
