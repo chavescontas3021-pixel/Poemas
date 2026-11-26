@@ -6,7 +6,8 @@ getProfile:api.getProfile,
 getPoems:api.getPoems,
 getPoem:api.getPoem,
 getRatings:api.getRatings,
-addRating:api.addRating
+addRating:api.addRating,
+countView:api.countView
 }),
 writable:false,
 configurable:false
