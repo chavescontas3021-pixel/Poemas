@@ -1,5 +1,5 @@
 import{initializeApp}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-import{getFirestore,collection,doc,getDoc,getDocs,addDoc,setDoc,deleteDoc,query,orderBy,serverTimestamp}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import{getFirestore,collection,doc,getDoc,getDocs,addDoc,setDoc,deleteDoc,query,orderBy,serverTimestamp,increment}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 import{firebaseConfig}from'./config.js';
 
@@ -50,6 +50,20 @@ text:String(r.text).slice(0,600),
 createdAt:serverTimestamp()
 });
 },
+async countView(){
+const ref=doc(db,'site','stats');
+let seen=false;
+try{seen=localStorage.getItem('cv_seen')==='1'}catch(e){}
+if(!seen){
+try{
+await setDoc(ref,{views:increment(1)},{merge:true});
+try{localStorage.setItem('cv_seen','1')}catch(e){}
+}catch(e){}
+}
+const snap=await getDoc(ref);
+return snap.exists()?Number(snap.data().views)||0:0;
+},
+user:()=>auth.currentUser,
 login:(email,pass)=>signInWithEmailAndPassword(auth,email,pass),
 logout:()=>signOut(auth),
 watch:cb=>onAuthStateChanged(auth,cb),
